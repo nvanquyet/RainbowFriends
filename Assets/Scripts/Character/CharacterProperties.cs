@@ -12,6 +12,7 @@ namespace Assets.Scripts.Character
 
         private void Start()
         {
+            numberLife = 3;
             shieldUp = false;
             hp = maxHp;
         }
@@ -59,18 +60,7 @@ namespace Assets.Scripts.Character
             }
         }
 
-        //Test
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.L) && !shieldUp)
-            {
-                Booster_ShieldUp(3f);
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                TakeDamage(10f);
-            }
-        }
+  
     }
 }
 

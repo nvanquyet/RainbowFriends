@@ -8,6 +8,7 @@ namespace Assets.Scripts.Interface
         void MoveCharacter(Vector2 direction);
 
         void Booster_FastTrack(float time);
+        void Booster_Rot(float time);
     }
 }
 

@@ -4,7 +4,7 @@ namespace Assets.Scripts.Interface
     {
        void Attack();
 
-       void Booster_StrongPunch(float radius);
+       void Booster_Shockwave(float distance);
     }
 }
 
