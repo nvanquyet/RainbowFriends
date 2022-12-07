@@ -6,17 +6,15 @@ namespace Assets.Scripts.Character
 {
     public class CharacterAttack : MonoBehaviour, IAttack
     {
-        float damage { get; set; }
-        [SerializeField] AttackRange attackRange;
-        [SerializeField] InputCtrl inputCtrl;
-        [SerializeField] bool useBooster;
-        [SerializeField] float timeUseBooster;
-        [SerializeField] float distacneUseBooster;
+        protected float damage { get; set; }
+        [SerializeField] protected AttackRange attackRange;
+        [SerializeField] protected bool useBooster;
+        [SerializeField] protected float timeUseBooster;
+        [SerializeField] protected float distacneUseBooster;
 
         private void Awake()
         {
-            attackRange = GetComponentInChildren<AttackRange>();S
-            inputCtrl = GetComponentInChildren<InputCtrl>();
+            attackRange = GetComponentInChildren<AttackRange>();
             attackRange.SetProperties(45, 25);
             useBooster = false;
             timeUseBooster = 2f;
@@ -32,7 +30,7 @@ namespace Assets.Scripts.Character
             {
                 Booster_Shockwave(distacneUseBooster);
             }
-            if (inputCtrl.attack)
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 Attack();
                 Debug.Log("Attack");
@@ -55,20 +53,20 @@ namespace Assets.Scripts.Character
         {
             yield return new WaitForSeconds(time);
             useBooster = false;
+            Debug.Log("Booster Complete");
         }
 
-        public virtual void Attack()
+        public void Attack()
         {
-            if (!useBooster)
+            GameObject targetObj = attackRange.ObjectInRange();
+            if (targetObj)
             {
-                if (attackRange.ObjectInRange() != null)
-                {
-                    Debug.Log("enemy; "+ attackRange.ObjectInRange().tag);
-                }
-                else
-                {
-                    Debug.Log("No enemy");
-                }
+                Debug.Log("Normal Attack");
+                Debug.Log("Attack: " + targetObj.tag);
+            }
+            else
+            {
+                   
             }
         }
     }
