@@ -1,3 +1,4 @@
+using Assets.Scripts.BOT;
 using Assets.Scripts.InputCharacter;
 using Assets.Scripts.Interface;
 using System.Collections;
@@ -10,20 +11,38 @@ namespace Assets.Scripts.Character
         [SerializeField] protected AttackRange attackRange;
         [SerializeField] protected bool useBooster;
         [SerializeField] protected float timeUseBooster;
+        [SerializeField] protected int numberTurnUseBooster;
         [SerializeField] protected float distacneUseBooster;
+        [SerializeField] protected float attackDelay;
+        [SerializeField] protected float timeAttack;
+        protected bool canAttack;
+        protected float m_attackDelay;
 
         private void Awake()
         {
             attackRange = GetComponentInChildren<AttackRange>();
-            attackRange.SetProperties(45, 25);
+        }
+
+        private void Start()
+        {
+            this.SetProperties();
+        }
+
+        protected virtual void SetProperties()
+        {
+            timeAttack = 0;
+            attackRange.SetProperties(45,10);
             useBooster = false;
             timeUseBooster = 2f;
             distacneUseBooster = 3f;
+            this.SetNumberTurn_Booster_Shockwave(5);
+            attackDelay = 0;
+            m_attackDelay = 0;
         }
-        
 
         private void Update()
         {
+            ReadyAttack();
             attackRange.SetOrigin(transform.position + Vector3.up + transform.forward/3);
             attackRange.SetForward(transform.forward);
             if (Input.GetKeyDown(KeyCode.P))
@@ -36,11 +55,24 @@ namespace Assets.Scripts.Character
                 Debug.Log("Attack");
             }
         }
+        protected void ReadyAttack()
+        {
+            if(m_attackDelay < attackDelay)
+            {
+                m_attackDelay += Time.deltaTime;
+                canAttack = false;
+            }
+            else
+            {
+                canAttack = true;
+            }
+        }
 
         public void Booster_Shockwave(float distacne)
         {
-            if (!useBooster)
+            if (!useBooster && numberTurnUseBooster > 0)
             {
+                ReduceBooster_Shockwave();
                 useBooster = true;
                 foreach(GameObject child in attackRange.ObjectInRange(distacne))
                 {
@@ -58,16 +90,50 @@ namespace Assets.Scripts.Character
 
         public void Attack()
         {
-            GameObject targetObj = attackRange.ObjectInRange();
-            if (targetObj)
+            if (canAttack)
             {
-                Debug.Log("Normal Attack");
-                Debug.Log("Attack: " + targetObj.tag);
-            }
-            else
+                GameObject targetObj = attackRange.ObjectInRange();
+                if (targetObj && (targetObj.tag.Equals("Player") || targetObj.tag.Equals("Enemy")))
+                {
+                    Debug.Log("Attack");
+                    timeAttack = Time.time;
+                    if (IsAttackFirst(timeAttack, targetObj.GetComponent<CharacterAttack>().GetTimeAttack()) && targetObj.GetComponent<ObjectProperties>().IsAlive())
+                    {
+                        Debug.Log(this.gameObject.name + " attack:  " + targetObj.name);
+                        targetObj.GetComponent<ObjectProperties>().Dead();
+                    }
+                }
+            }   
+        }
+
+        bool IsAttackFirst(float timeObjA,float timeObjB)
+        {
+            if(timeObjA > timeObjB)
             {
-                   
+                return true;
             }
+            return false;
+        }
+
+
+        public int GetNumberTurn_Booster_Shockwave()
+        {
+            return this.numberTurnUseBooster;
+        }
+
+        public void ReduceBooster_Shockwave()
+        {
+            this.numberTurnUseBooster--;
+        }
+
+        public void SetNumberTurn_Booster_Shockwave(int numberTurn)
+        {
+            this.numberTurnUseBooster = numberTurn;
+        }
+
+        public float GetTimeAttack()
+        {
+            return timeAttack;
         }
     }
 }

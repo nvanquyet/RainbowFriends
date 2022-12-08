@@ -7,45 +7,20 @@ namespace Assets.Scripts.Logic
     {
         public GameObject ObjNearest(List<GameObject> listObj)
         {
+            GameObject objNear = null;
             if (listObj.Count > 0)
             {
-                if (listObj.Count == 1)
-                {
-                    return listObj[0];
-                }
-                else
-                {
-                    float distance = distanceMin(listObj);
-                    List<GameObject> listObjectNear = new List<GameObject>();
-                    foreach (GameObject child in listObj)
+                float distance = Mathf.Infinity;
+                foreach (GameObject child in listObj)
+                { 
+                    if ((child.transform.position - this.transform.position).magnitude < distance)
                     {
-                        float distacneObj = (child.transform.position - child.transform.position).magnitude;
-                        if (distacneObj == distance)
-                        {
-                            listObjectNear.Add(child);
-                        }
-                    }
-                    if (listObjectNear.Count > 0)
-                    {
-                        Debug.Log(listObjectNear[Random.Range(0, listObjectNear.Count - 1)].name);
-                        return listObjectNear[Random.Range(0, listObjectNear.Count - 1)];
+                        distance = (child.transform.position - this.transform.position).magnitude;
+                        objNear = child;
                     }
                 }
             }
-            return null;
-        }
-
-
-        float distanceMin(List<GameObject> listObj)
-        {
-            float distance = 0;
-            foreach (GameObject child in listObj)
-            {
-                float distacneObj = (child.transform.position - child.transform.position).magnitude;
-                distance = Mathf.Min(distance, distacneObj);
-            }
-            Debug.Log(distance);
-            return distance;
+            return objNear;
         }
     }
 }

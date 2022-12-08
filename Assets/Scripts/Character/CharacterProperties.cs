@@ -3,26 +3,22 @@ using System.Collections;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {
-    public class CharacterProperties : MonoBehaviour, IProperties
+    public class CharacterProperties : ObjectProperties, IProperties
     {
-        [SerializeField] float maxHp;
-        [SerializeField] float numberLife { get; set; }
-        float hp { get; set; }
+        [SerializeField] protected int numberLife;
         bool shieldUp;
 
         private void Start()
         {
             numberLife = 3;
             shieldUp = false;
-            hp = maxHp;
         }
         public virtual void Booster_SecondLife()
         {
             numberLife--;
-            if(numberLife > 0)
+            if(GetNumberLife() > 0)
             {
                 Debug.Log("Second Life");
-                hp = maxHp;
             }
             else
             {
@@ -44,23 +40,16 @@ namespace Assets.Scripts.Character
             Debug.Log("shieldUp: " + shieldUp);
         }
 
-        public virtual void TakeDamage(float damage)
+        public int GetNumberLife()
         {
-            if (!shieldUp)
-            {
-                hp -= damage;
-                if(hp > 0)
-                {
-                    Debug.Log(hp);
-                }
-                else
-                {
-                    Booster_SecondLife();
-                }
-            }
+            return this.numberLife;
         }
 
-  
+        public void SetNumberLife(int number)
+        {
+            this.numberLife = number;
+        }
+
     }
 }
 

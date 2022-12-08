@@ -7,19 +7,59 @@ namespace Assets.Scripts.Character
     {
         [SerializeField] protected float speed;
         [SerializeField] protected float speedRotate;
-        [SerializeField] protected bool useBooster;
+        [SerializeField] protected bool useBooster_FastTrack;
+        [SerializeField] protected bool useBooster_Rot;
+        protected int turnUseBooster_FastTrack;
+        protected int turnUseBooster_Rot;
         protected bool canMove;
         Vector3 fw;
         Vector3 right;
 
         private void Start()
         {
-            useBooster = false;
+            SetProperties();
+        }
+
+        protected virtual void SetProperties()
+        {
+            speed = 5f;
+            useBooster_FastTrack = false;
+            useBooster_Rot = false;
             canMove = true;
             fw = Vector3.zero;
             right = Vector3.zero;
+            SetNumberTurn_Booster_FastTrack(5);
+            SetNumberTurn_Booster_Rot(5);
         }
-        public virtual void MoveCharacter(Vector2 direction)
+
+        public int GetNumberTurn_Booster_FastTrack()
+        {
+            return turnUseBooster_FastTrack;
+        }
+
+        public int GetNumberTurn_Booster_Rot()
+        {
+            return turnUseBooster_Rot;
+        }
+
+
+        public void ReduceBooster_FastTrack()
+        {
+            if(turnUseBooster_FastTrack > 0)
+            {
+                turnUseBooster_FastTrack--;
+            }
+        }
+
+        public void ReduceBooster_Rot()
+        {
+            if (turnUseBooster_Rot > 0)
+            {
+                turnUseBooster_Rot--;
+            }
+        }
+
+        public void MoveCharacter(Vector2 direction)
         {
             if (canMove)
             {
@@ -62,58 +102,87 @@ namespace Assets.Scripts.Character
 
         public virtual void Booster_FastTrack(float time)
         {
-            if (!useBooster)
+            if (!useBooster_FastTrack && turnUseBooster_FastTrack > 0)
             {
-                useBooster = true;
+                ReduceBooster_FastTrack();
+                useBooster_FastTrack = true;
                 speed *= 2;
-                StartCoroutine(Booster_Done(time));
+                StartCoroutine(Booster_Done(time, "FastTrack"));
             }
         }
 
 
         public void Booster_Rot(float time)
         {
-            if (!useBooster)
+            if (!useBooster_Rot && turnUseBooster_Rot > 0)
             {
-                useBooster = true;
-                canMove = false;
-                StartCoroutine(Booster_Done(time));
+                ReduceBooster_Rot();
+                useBooster_Rot = true;
+                StartCoroutine(Booster_Done(time, "Rot"));
             }
             
         }
 
-        IEnumerator Booster_Done(float time)
+        IEnumerator Booster_Done(float time,string Key)
         {
             yield return new WaitForSeconds(time);
-            if (canMove)
+            switch (Key)
             {
-                speed /= 2;
+                case "FastTrack":
+                    {
+                        useBooster_FastTrack = false;
+                        speed /= 2;
+                        break;
+                    }
+                case "Rot":
+                    {
+                        useBooster_Rot = false;
+                        break;
+                    }
+                case "Move":
+                    {
+                        canMove = true;
+                        break;
+                    }
             }
-            else
-            {
-                canMove = true;
-            }
-            useBooster = false;
         }
 
 
+        public void NoMove(float time)
+        {
+            canMove = false;
+            StartCoroutine(Booster_Done(time, "Move"));
+        }
 
-
-        //Test
         private void Update()
         {
-            MoveCharacter(new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")));
-            if (!useBooster && Input.GetKeyDown(KeyCode.LeftShift))
+            if (!useBooster_FastTrack && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Booster_FastTrack(5f);
             }
 
-            if (!useBooster && Input.GetKeyDown(KeyCode.K))
+            if (!useBooster_FastTrack && Input.GetKeyDown(KeyCode.K))
             {
                 Booster_Rot(2f);
             }
         }
 
+        //Test
+        private void FixedUpdate()
+        {
+            MoveCharacter(new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")));
+            
+        }
+
+        public void SetNumberTurn_Booster_FastTrack(int numberTurn)
+        {
+            this.turnUseBooster_FastTrack = numberTurn;
+        }
+
+        public void SetNumberTurn_Booster_Rot(int numberTurn)
+        {
+            this.turnUseBooster_Rot = numberTurn;
+        }
     }
 }
 

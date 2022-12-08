@@ -4,7 +4,10 @@ namespace Assets.Scripts.Interface
     {
         void Booster_SecondLife();
         void Booster_ShieldUp(float time);
-        void TakeDamage(float damage);
+        int GetNumberLife();
+        void SetNumberLife(int number);
+        bool IsAlive();
+        void Dead();
     }
 }
 

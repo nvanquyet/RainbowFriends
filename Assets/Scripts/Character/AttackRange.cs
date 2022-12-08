@@ -47,7 +47,7 @@ namespace Assets.Scripts.Character
             List<GameObject> list = new List<GameObject>();
             for(float i = 0; i <= numberRay ; i ++)
             {
-                Debug.DrawRay(origin, handleDegree.GetVectorFromAngle(startingAngle), Color.red);
+                //Debug.DrawRay(origin, handleDegree.GetVectorFromAngle(startingAngle), Color.red);
                 RaycastHit hit;
                 if(Physics.Raycast(origin, handleDegree.GetVectorFromAngle(startingAngle),out hit, distanceAttack))
                 {
