@@ -88,8 +88,7 @@ namespace Assets.Scripts.Character
         }
         public virtual void SetProperties(float mutilple)
         {
-            this.distanceAttack *= mutilple;
-            this.attackRange *= mutilple;
+            this.distanceAttack += this.distanceAttack * mutilple / 100;
         }
     }
 }

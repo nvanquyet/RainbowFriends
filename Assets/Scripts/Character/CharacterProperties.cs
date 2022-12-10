@@ -1,55 +1,23 @@
 using Assets.Scripts.Interface;
-using System.Collections;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {
-    public class CharacterProperties : ObjectProperties, IProperties
+    public class CharacterProperties : MonoBehaviour, IProperties
     {
-        [SerializeField] protected int numberLife;
-        bool shieldUp;
-
-        private void Start()
+        public bool isSheildUp = false;
+        public bool IsAlive()
         {
-            numberLife = 3;
-            shieldUp = false;
-        }
-        public virtual void Booster_SecondLife()
-        {
-            numberLife--;
-            if(GetNumberLife() > 0)
+            if (this.gameObject.activeSelf)
             {
-                Debug.Log("Second Life");
+                return true;
             }
-            else
-            {
-                Debug.Log("Die");
-            }
+            return false;
         }
 
-        public virtual void Booster_ShieldUp(float time)
+        public void Dead()
         {
-            shieldUp = true;
-            Debug.Log("shieldUp: " + shieldUp);
-            StartCoroutine(Booster_ShieldUp_Done(time));
+            this.gameObject.SetActive(false);
         }
-
-        IEnumerator Booster_ShieldUp_Done(float time)
-        {
-            yield return new WaitForSeconds(time);
-            shieldUp = false;
-            Debug.Log("shieldUp: " + shieldUp);
-        }
-
-        public int GetNumberLife()
-        {
-            return this.numberLife;
-        }
-
-        public void SetNumberLife(int number)
-        {
-            this.numberLife = number;
-        }
-
     }
 }
 

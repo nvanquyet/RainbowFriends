@@ -1,47 +1,31 @@
 using Assets.Scripts.Character;
 using UnityEngine;
 
-namespace Assets.Scripts.BOT
- {
-    public class BOTAttack : CharacterAttack
+namespace Assets.Scripts.Player
+{
+    public class PlayerAttack : CharacterAttack
     {
-        [SerializeField] private BOTTarget targetAI;
-        [SerializeField] private float mutilNumber;
-        [SerializeField] private GameObject target;
-         
         private void Awake()
         {
             attackRange = GetComponent<AttackRange>();
-            targetAI = GetComponent<BOTTarget>();
-            //Degree and Distance check
-            attackRange.SetProperties(45/2 , 10/2);
         }
-
         private void Start()
         {
             SetProperties();
         }
-
         protected override void SetProperties()
         {
-            attackRange.SetProperties(45/2, 10/2);
+            //Degree and Distance check
+            attackRange.SetProperties(45, 10);
             attackDelay = 0;
             m_attackDelay = 0;
         }
-
         private void Update()
         {
             ReadyAttack();
             attackRange.SetOrigin(transform.position + Vector3.up + transform.forward / 3);
             attackRange.SetForward(transform.forward);
-            target = targetAI.FindPlayer();
-            if(target)
-            {
-                 Attack();
-            }
         }
-
-
     }
 }
 

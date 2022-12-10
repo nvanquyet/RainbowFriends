@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.BOT
 {
-    public class BOTMovement : CharacterMove
+    public class BOTMovement : CharacterMovement
     {
         [SerializeField] private NavMeshAgent navMesh;
         private BOTTarget targetAI;
@@ -17,42 +17,19 @@ namespace Assets.Scripts.BOT
         }
         private void Start()
         {
-        }
-
-        protected override void SetProperties()
-        {
-            speed = 5f;
-            useBooster_FastTrack = false;
-            useBooster_Rot = false;
             canMove = true;
-            SetNumberTurn_Booster_FastTrack(1);
-            SetNumberTurn_Booster_Rot(1);
         }
 
-        public void Movement()
+
+        public override void Movement()
         {
             navMesh.SetDestination(target.transform.position);
-            if ((target.transform.position - transform.position).magnitude <= 5 * 25)
-            {
-                Booster_FastTrack(2f);
-            }
         }
 
         //Test
         private void Update()
         {
             target = targetAI.FindPlayer();
-            if (target)
-            {
-                if ((target.transform.position - transform.position).magnitude <= 5)
-                {
-                    canMove = false;
-                }
-                else
-                {
-                    canMove = true;
-                }
-            }
         }
         private void FixedUpdate()
         {
@@ -61,6 +38,10 @@ namespace Assets.Scripts.BOT
                 if (canMove)
                 {
                     Movement();
+                }
+                else
+                {
+                    navMesh.SetDestination(transform.position);
                 }
             }
         }
