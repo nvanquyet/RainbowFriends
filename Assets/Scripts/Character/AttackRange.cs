@@ -69,12 +69,16 @@ namespace Assets.Scripts.Character
         public List<GameObject> ObjectInRange(float distance)
         {
             List<GameObject> listBooster = new List<GameObject>();
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, distance))
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(transform.position, transform.forward, distance,layerMask);
+            foreach(RaycastHit hit in hits)
             {
                 if (hit.collider.tag.Equals("Enemy") || hit.collider.tag.Equals("Player"))
                 {
-                    listBooster.Add(hit.collider.gameObject);
+                    if (!listBooster.Contains(hit.collider.gameObject)) 
+                    {
+                        listBooster.Add(hit.collider.gameObject);
+                    }
                 }
             }
             return listBooster;

@@ -1,22 +1,33 @@
 using Assets.Scripts.Character;
+using Assets.Scripts.InputCharacter;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
     public class PlayerMovement : CharacterMovement
     {
-        [SerializeField] protected Vector2 input;
+        [SerializeField] protected InputCtrl input;
         Vector3 fw;
         Vector3 right;
+        private void Awake()
+        {
+            input = GetComponentInChildren<InputCtrl>();
+        }
 
         private void Start()
         {
             canMove = true;
+            speed = 5f;
         }
 
+
+        private void FixedUpdate()
+        {
+            Movement();
+        }
         public override void Movement()
         {
-            MoveCharacter(input);
+            MoveCharacter(input.direction);
         }
 
         public void MoveCharacter(Vector2 direction)

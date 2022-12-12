@@ -1,13 +1,11 @@
 ﻿using Assets.Scripts.Character;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Booster
 {
     public class Booster_SheildUp : BoosterBase
     {
-
         public override void ActiveBooster()
         {
             BoosterSheildUp();
@@ -20,8 +18,8 @@ namespace Assets.Scripts.Booster
                 useBooster = true;
                 GetComponent<CharacterProperties>().isSheildUp = true;
                 ReduceBooster();
+                StartCoroutine(Booster_Complete(timeUseBooster));
             }
-            StartCoroutine(Booster_Complete(timeUseBooster));
         }
         IEnumerator Booster_Complete(float time)
         {

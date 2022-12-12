@@ -35,7 +35,7 @@ namespace Assets.Scripts.Character
             }
         }
 
-        public void Attack()
+        public virtual void Attack()
         {
             if (canAttack)
             {
@@ -74,10 +74,10 @@ namespace Assets.Scripts.Character
         {
             attackRange.SetProperties(percent);
             gameObject.GetComponent<CharacterMovement>().KillSpree(percent);
-            this.gameObject.AddComponent<Model>();
-            if (GetComponentInChildren<Model>())
+            this.gameObject.AddComponent<CharacterModel>();
+            if (GetComponentInChildren<CharacterModel>())
             {
-                GetComponentInChildren<Model>().KillingSpree(percent);
+                GetComponentInChildren<CharacterModel>().KillingSpree(percent);
             }
         }
     }

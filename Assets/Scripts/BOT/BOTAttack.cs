@@ -1,3 +1,4 @@
+using Assets.Scripts.Booster;
 using Assets.Scripts.Character;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Assets.Scripts.BOT
             attackRange.SetProperties(45/2, 10/2);
             attackDelay = 0;
             m_attackDelay = 0;
+            percentIncrease = 5;
         }
 
         private void Update()

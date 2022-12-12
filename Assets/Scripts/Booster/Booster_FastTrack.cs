@@ -20,8 +20,8 @@ namespace Assets.Scripts.Booster
                 useBooster = true;
                 ReduceBooster();
                 GetComponent<CharacterMovement>().speed *= 2;
+                StartCoroutine(Booster_Complete(timeUseBooster));
             }
-            StartCoroutine(Booster_Complete(timeUseBooster));
         }
         IEnumerator Booster_Complete(float time)
         {

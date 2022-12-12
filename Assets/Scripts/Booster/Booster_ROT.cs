@@ -15,6 +15,7 @@ namespace Assets.Scripts.Booster
         }
         void UpdateList()
         {
+            listCharacter.Clear();
             listCharacter.Add(GameObject.Find("Player"));
             foreach (Transform child in GameObject.Find("BOTS").transform)
             {
@@ -31,7 +32,7 @@ namespace Assets.Scripts.Booster
 
         void Booster_ROT_Effect(float time)
         {
-            if (!useBooster)
+            if (!useBooster && turnUseBooster > 0)
             {
                 useBooster = true;
                 foreach (GameObject obj in listCharacter)
@@ -56,7 +57,7 @@ namespace Assets.Scripts.Booster
 
         public override void ActiveBooster()
         {
-            Booster_ROT_Effect(timeUseBooster);
+           // Booster_ROT_Effect(timeUseBooster);
         }
     }
 }

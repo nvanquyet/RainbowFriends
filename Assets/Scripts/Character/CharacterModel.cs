@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Character
 {
-    public class Model : MonoBehaviour
+    public class CharacterModel : MonoBehaviour
     {
         public void KillingSpree(float percent)
         {

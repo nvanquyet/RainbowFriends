@@ -13,6 +13,10 @@ namespace Assets.Scripts.Booster
         {
             this.turnUseBooster = numberTurn;
         }
+        public void SetTimeUseBooster(float time)
+        {
+            this.timeUseBooster = time;
+        }
         public int GetNumberTurn_Booster()
         {
             return turnUseBooster;

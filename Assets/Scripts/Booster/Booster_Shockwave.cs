@@ -6,7 +6,7 @@ namespace Assets.Scripts.Booster
 {
     public class Booster_Shockwave : BoosterBase
     {
-        [SerializeField] private float distacne;
+        [SerializeField] private float distacne = 10;
 
         public override void ActiveBooster()
         {
@@ -23,8 +23,8 @@ namespace Assets.Scripts.Booster
                 {
                     Destroy(child, 0.5f);
                 }
+                StartCoroutine(Booster_Complete(timeUseBooster));
             }
-            StartCoroutine(Booster_Complete(timeUseBooster));
         }
         IEnumerator Booster_Complete(float time)
         {
