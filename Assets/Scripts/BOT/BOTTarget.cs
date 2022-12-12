@@ -11,6 +11,7 @@ namespace Assets.Scripts.BOT
         [SerializeField] private float radius;
         [SerializeField] private LayerMask layerMask;
         [SerializeField] List<GameObject> list = new List<GameObject>();
+        public GameObject target;
 
         private void Awake()
         {
@@ -18,7 +19,12 @@ namespace Assets.Scripts.BOT
             objNear = GetComponent<LogicFindObjNear>();
         }
 
-        public GameObject FindPlayer()
+        private void Update()
+        {
+            target = FindPlayer();
+        }
+
+        protected GameObject FindPlayer()
         {
             list.Clear();
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerMask);

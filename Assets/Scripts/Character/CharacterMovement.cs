@@ -13,6 +13,18 @@ namespace Assets.Scripts.Character
         {
             this.speed += speed * percent / 100;
         }
+
+        public void NoMove(float time)
+        {
+            canMove = false;
+            StartCoroutine(CanMove(time));
+        }
+
+        IEnumerator CanMove(float time)
+        {
+            yield return new WaitForSeconds(time);
+            canMove = true;
+        }
     }
 }
 

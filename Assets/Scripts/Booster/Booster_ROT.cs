@@ -16,16 +16,16 @@ namespace Assets.Scripts.Booster
         void UpdateList()
         {
             listCharacter.Clear();
-            listCharacter.Add(GameObject.Find("Player"));
             foreach (Transform child in GameObject.Find("BOTS").transform)
             {
                 if (child.gameObject.activeSelf)
                 {
-                    if (!listCharacter.Contains(child.gameObject))
-                    {
-                        listCharacter.Add(child.gameObject);
-                    }
+                     listCharacter.Add(child.gameObject);
                 }
+            }
+            if (GameObject.Find("Player"))
+            {
+                 listCharacter.Add(GameObject.Find("Player"));
             }
             listCharacter.Remove(this.gameObject);
         }
@@ -35,29 +35,24 @@ namespace Assets.Scripts.Booster
             if (!useBooster && turnUseBooster > 0)
             {
                 useBooster = true;
+                ReduceBooster();
                 foreach (GameObject obj in listCharacter)
                 {
-                    obj.GetComponent<CharacterMovement>().canMove = false;
-                    Debug.Log("ROT Start");
+                    obj.GetComponent<CharacterMovement>().NoMove(timeUseBooster);
                 }
-                StartCoroutine(Booster_ROT_DONE(time));
+                StartCoroutine(Booster_ROT_Done(timeUseBooster));
             }
         }
 
-        IEnumerator Booster_ROT_DONE(float time)
+        IEnumerator Booster_ROT_Done(float time)
         {
             yield return new WaitForSeconds(time);
-            foreach (GameObject obj in listCharacter)
-            {
-                useBooster = false;
-                obj.GetComponent<CharacterMovement>().canMove = true;
-                Debug.Log("ROT complete");
-            }
+            useBooster = false;
         }
 
         public override void ActiveBooster()
         {
-           // Booster_ROT_Effect(timeUseBooster);
+            Booster_ROT_Effect(timeUseBooster);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Assets.Scripts.BOT
     {
         [SerializeField] private BOTTarget targetAI;
         [SerializeField] private float mutilNumber;
-        [SerializeField] private GameObject target;
          
         private void Awake()
         {
@@ -36,8 +35,7 @@ namespace Assets.Scripts.BOT
             ReadyAttack();
             attackRange.SetOrigin(transform.position + Vector3.up + transform.forward / 3);
             attackRange.SetForward(transform.forward);
-            target = targetAI.FindPlayer();
-            if(target)
+            if(targetAI.target)
             {
                  Attack();
             }

@@ -8,7 +8,7 @@ namespace Assets.Scripts.BOT
     {
         [SerializeField] private BoosterBase booster;
         [SerializeField] private BOTTarget targetAI;
-        [SerializeField] private GameObject target;
+
         private void Awake()
         {
             targetAI = GetComponent<BOTTarget>();
@@ -28,7 +28,7 @@ namespace Assets.Scripts.BOT
 
         private void Update()
         {
-            target = targetAI.FindPlayer();
+            GameObject target = targetAI.target;
             if(target)
             {
                 if((target.transform.position - transform.position).magnitude < 5 * 10)

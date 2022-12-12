@@ -8,7 +8,6 @@ namespace Assets.Scripts.BOT
     {
         [SerializeField] private NavMeshAgent navMesh;
         private BOTTarget targetAI;
-        private GameObject target;
 
         private void Awake()
         {
@@ -20,20 +19,14 @@ namespace Assets.Scripts.BOT
             canMove = true;
         }
 
-
         public override void Movement()
         {
-            navMesh.SetDestination(target.transform.position);
+            navMesh.SetDestination(targetAI.target.transform.position);
         }
 
-        //Test
-        private void Update()
-        {
-            target = targetAI.FindPlayer();
-        }
         private void FixedUpdate()
         {
-            if (target)
+            if (targetAI.target)
             {
                 if (canMove)
                 {
