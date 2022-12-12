@@ -30,7 +30,6 @@ namespace Assets.Scripts.Booster
         {
             yield return new WaitForSeconds(time);
             useBooster = false;
-            Debug.Log("Booster Complete");
         }
 
     }

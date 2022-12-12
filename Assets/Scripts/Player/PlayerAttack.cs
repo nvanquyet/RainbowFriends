@@ -29,7 +29,7 @@ namespace Assets.Scripts.Player
         private void Update()
         {
             ReadyAttack();
-            attackRange.SetOrigin(transform.position + Vector3.up + transform.forward / 3);
+            attackRange.SetOrigin(transform.position + 10 * Vector3.up + transform.forward / 3);
             attackRange.SetForward(transform.forward);
 
         }

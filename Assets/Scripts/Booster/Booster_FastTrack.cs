@@ -28,7 +28,6 @@ namespace Assets.Scripts.Booster
             yield return new WaitForSeconds(time);
             useBooster = false;
             GetComponent<CharacterMovement>().speed /= 2;
-            Debug.Log("Booster Complete");
         }
 
     }

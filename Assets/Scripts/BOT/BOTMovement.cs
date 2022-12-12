@@ -21,21 +21,21 @@ namespace Assets.Scripts.BOT
 
         public override void Movement()
         {
-            navMesh.SetDestination(targetAI.target.transform.position);
+            if (canMove)
+            {
+                navMesh.SetDestination(targetAI.target.transform.position);
+            }
+            else
+            {
+                navMesh.SetDestination(transform.position);
+            }
         }
 
         private void FixedUpdate()
         {
             if (targetAI.target)
             {
-                if (canMove)
-                {
-                    Movement();
-                }
-                else
-                {
-                    navMesh.SetDestination(transform.position);
-                }
+              Movement();
             }
         }
 

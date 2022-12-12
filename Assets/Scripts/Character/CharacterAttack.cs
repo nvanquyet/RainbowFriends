@@ -42,13 +42,11 @@ namespace Assets.Scripts.Character
                 GameObject targetObj = attackRange.ObjectInRange();
                 if (targetObj && (targetObj.tag.Equals("Player") || targetObj.tag.Equals("Enemy")))
                 {
-                    Debug.Log("Attack");
                     timeAttack = Time.time;
                     if (IsAttackFirst(timeAttack, targetObj.GetComponent<CharacterAttack>().GetTimeAttack()) 
                         && targetObj.GetComponent<CharacterProperties>().IsAlive()
                         && !targetObj.GetComponent<CharacterProperties>().isSheildUp)
                     {
-                        Debug.Log(this.gameObject.name + " attack:  " + targetObj.name);
                         targetObj.GetComponent<CharacterProperties>().Dead();
                         this.KillingSpree(percentIncrease);
                     }

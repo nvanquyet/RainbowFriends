@@ -26,7 +26,6 @@ namespace Assets.Scripts.Booster
             yield return new WaitForSeconds(time);
             useBooster = false;
             GetComponent<CharacterProperties>().isSheildUp = false;
-            Debug.Log("Booster Complete");
         }
 
     }
