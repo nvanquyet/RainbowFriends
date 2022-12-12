@@ -451,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b588d742c20e154ea3e2d42f68a9ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   input: {fileID: 0}
   listBooster: []
 --- !u!1 &223404054
@@ -691,6 +692,7 @@ GameObject:
   - component: {fileID: 479613190}
   - component: {fileID: 479613189}
   - component: {fileID: 479613188}
+  - component: {fileID: 479613197}
   - component: {fileID: 479613194}
   - component: {fileID: 479613187}
   - component: {fileID: 479613185}
@@ -731,6 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041bf0cab34e0624186a0b2ff7c7a918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   attackRange: {fileID: 0}
   attackDelay: 0
   percentIncrease: 0
@@ -749,6 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126aee1806bdbc84589f762893749bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   speed: 5
   canMove: 0
   navMesh: {fileID: 0}
@@ -912,8 +916,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7be8ff15fd3aa46a6959d9e9f154ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   booster: {fileID: 0}
   targetAI: {fileID: 0}
+--- !u!114 &479613197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479613183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 0
+  StateAttack: 0
+  StateBooster: 0
 --- !u!1 &597030212
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,6 +950,7 @@ GameObject:
   - component: {fileID: 597030224}
   - component: {fileID: 597030223}
   - component: {fileID: 597030222}
+  - component: {fileID: 597030225}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -955,6 +976,7 @@ Transform:
   - {fileID: 846586486}
   - {fileID: 689267902}
   - {fileID: 1793051373343101411}
+  - {fileID: 1986923937}
   m_Father: {fileID: 1113027336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -984,10 +1006,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.9
-  m_Height: 7
+  m_Radius: 1.31
+  m_Height: 8.62
   m_Direction: 1
-  m_Center: {x: 0, y: 8.75, z: 0}
+  m_Center: {x: 0, y: 9.55, z: 0}
 --- !u!33 &597030219
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1021,6 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1496f3deddf0041827170824d79a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   attackRange: {fileID: 0}
   attackDelay: 0
   percentIncrease: 0
@@ -1038,6 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65d2642c417a8d40b0b6a05ff3f0ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   speed: 0
   canMove: 0
   input: {fileID: 0}
@@ -1057,6 +1081,21 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 448
+--- !u!114 &597030225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597030212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 0
+  StateAttack: 0
+  StateBooster: 0
 --- !u!1 &660655739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1331,7 @@ GameObject:
   - component: {fileID: 866631548}
   - component: {fileID: 866631547}
   - component: {fileID: 866631546}
+  - component: {fileID: 866631555}
   - component: {fileID: 866631552}
   - component: {fileID: 866631545}
   - component: {fileID: 866631543}
@@ -1332,6 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041bf0cab34e0624186a0b2ff7c7a918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   attackRange: {fileID: 0}
   attackDelay: 0
   percentIncrease: 0
@@ -1350,6 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126aee1806bdbc84589f762893749bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   speed: 5
   canMove: 0
   navMesh: {fileID: 0}
@@ -1514,8 +1556,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7be8ff15fd3aa46a6959d9e9f154ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   booster: {fileID: 0}
   targetAI: {fileID: 0}
+--- !u!114 &866631555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866631541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 0
+  StateAttack: 0
+  StateBooster: 0
 --- !u!1 &873070870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1588,7 @@ GameObject:
   - component: {fileID: 873070871}
   - component: {fileID: 873070875}
   - component: {fileID: 873070878}
+  - component: {fileID: 873070885}
   - component: {fileID: 873070882}
   - component: {fileID: 873070876}
   - component: {fileID: 873070880}
@@ -1551,7 +1610,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873070870}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -1656,6 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126aee1806bdbc84589f762893749bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   speed: 5
   canMove: 0
   navMesh: {fileID: 0}
@@ -1689,6 +1749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041bf0cab34e0624186a0b2ff7c7a918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   attackRange: {fileID: 0}
   attackDelay: 0
   percentIncrease: 0
@@ -1751,8 +1812,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7be8ff15fd3aa46a6959d9e9f154ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   booster: {fileID: 0}
   targetAI: {fileID: 0}
+--- !u!114 &873070885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873070870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 0
+  StateAttack: 0
+  StateBooster: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,6 +2025,7 @@ GameObject:
   - component: {fileID: 1100898034}
   - component: {fileID: 1100898033}
   - component: {fileID: 1100898032}
+  - component: {fileID: 1100898041}
   - component: {fileID: 1100898038}
   - component: {fileID: 1100898031}
   - component: {fileID: 1100898029}
@@ -1988,6 +2066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041bf0cab34e0624186a0b2ff7c7a918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   attackRange: {fileID: 0}
   attackDelay: 0
   percentIncrease: 0
@@ -2006,6 +2085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126aee1806bdbc84589f762893749bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   speed: 5
   canMove: 0
   navMesh: {fileID: 0}
@@ -2170,8 +2250,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7be8ff15fd3aa46a6959d9e9f154ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
   booster: {fileID: 0}
   targetAI: {fileID: 0}
+--- !u!114 &1100898041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100898027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 0
+  StateAttack: 0
+  StateBooster: 0
 --- !u!1 &1113027335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2837,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964191802}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1986923936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1986923937}
+  - component: {fileID: 1986923938}
+  m_Layer: 8
+  m_Name: StateControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1986923937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986923936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 597030213}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986923938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986923936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7004f870f2164447a956a6a35dab8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateMove: 1
+  StateAttack: 1
+  StateBooster: 4
 --- !u!1 &2067961024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,8 +3146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6778075002043352727}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 5.25, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0, y: 5.25, z: 0.36}
+  m_LocalScale: {x: 0.61, y: 0.66, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2409829063624444960}

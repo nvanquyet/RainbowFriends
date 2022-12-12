@@ -1,7 +1,13 @@
-﻿using Assets.Scripts.Interface;
-using UnityEngine;
+﻿using UnityEngine;
 namespace Assets.Scripts.InputCharacter
 {
+    public interface IInput
+    {
+        //UseForPlayer
+        Vector2 direction { get; }
+        bool attack { get; }
+    }
+
     public class InputCtrl : MonoBehaviour, IInput
     {
         public Vector2 direction { get => new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); }
@@ -13,3 +19,4 @@ namespace Assets.Scripts.InputCharacter
         public bool useBoosterShockwave;
     }
 }
+ 

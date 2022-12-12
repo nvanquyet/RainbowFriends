@@ -1,11 +1,15 @@
-using Assets.Scripts.Interface;
-using Assets.Scripts.Booster;
 using System.Collections;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {
+    public interface IMove
+    {
+        void Movement();
+    }
+
     public abstract class CharacterMovement : MonoBehaviour,IMove
     {
+        [SerializeField] protected CharacterState state;
         public float speed;
         public bool canMove;
         public abstract void Movement();

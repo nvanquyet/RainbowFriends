@@ -1,5 +1,3 @@
-using Assets.Scripts.Interface;
-using System.Collections;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {

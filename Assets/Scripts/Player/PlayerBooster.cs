@@ -1,6 +1,7 @@
 using Assets.Scripts.Booster;
 using Assets.Scripts.Character;
 using Assets.Scripts.InputCharacter;
+using Assets.Scripts.StateControl;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Player
 
         private void Awake()
         {
+            state = GetComponentInParent<CharacterState>();
             input = transform.parent.GetComponentInChildren<InputCtrl>();
             foreach(Transform child in transform)
             {
@@ -28,8 +30,12 @@ namespace Assets.Scripts.Player
         }
         public override void SetProperties()
         {
+            if(state != null)
+            {
+                state.stateBooster = StateBooster.NoBooster;
+            }
             //Degree and Distance check
-            foreach(BoosterBase booster in listBooster)
+            foreach (BoosterBase booster in listBooster)
             {
                 booster.SetNumberTurn_Booster(5);
                 booster.SetTimeUseBooster(5);
@@ -41,20 +47,28 @@ namespace Assets.Scripts.Player
             if (input.useBoosterFastTrack)
             {
                 ActiveBooster(0);
+                state.stateBooster = StateBooster.FastTrack;
+                return;
             }
             if (input.useBoosterRot)
             {
                 ActiveBooster(1);
+                state.stateBooster = StateBooster.Rot;
+                return;
             }
             if (input.useBoosterSheildUp)
             {
                 ActiveBooster(2);
+                state.stateBooster = StateBooster.SheildUp;
+                return;
             }
             if (input.useBoosterShockwave)
             {
                 ActiveBooster(3);
+                state.stateBooster = StateBooster.Shockwave;
+                return;
             }
-
+            state.stateBooster = StateBooster.NoBooster;
         }
 
         public void ActiveBooster(string booster)
@@ -63,29 +77,29 @@ namespace Assets.Scripts.Player
             {
                 case "FastTrack":
                     {
-                        listBooster[0].ActiveBooster();
+                        ActiveBooster(0);
                         break;
                     }
                 case "Rot":
                     {
-                        listBooster[1].ActiveBooster();
+                        ActiveBooster(1);
                         break;
                     }
                 case "ShieldUp":
                     {
-                        listBooster[2].ActiveBooster();
+                        ActiveBooster(2);
                         break;
                     }
                 case "Shockwave":
                     {
-                        listBooster[3].ActiveBooster();
+                        ActiveBooster(3);
                         break;
                     }
             }
         }
 
 
-        public void ActiveBooster(int booster)
+        void ActiveBooster(int booster)
         {
             /*
              0 -> FastTrack
@@ -93,7 +107,10 @@ namespace Assets.Scripts.Player
              2 -> ShieldUp
              3 -> Shockwave
              */
-           listBooster[(int)booster].ActiveBooster();
+            if(booster <= listBooster.Count)
+            {
+                listBooster[(int)booster].ActiveBooster();
+            }
         }
 
         public override void ActiveBooster()

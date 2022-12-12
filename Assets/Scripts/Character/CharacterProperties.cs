@@ -1,7 +1,11 @@
-using Assets.Scripts.Interface;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {
+    public interface IProperties
+    {
+        bool IsAlive();
+        void Dead();
+    }
     public class CharacterProperties : MonoBehaviour, IProperties
     {
         public bool isSheildUp = false;

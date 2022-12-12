@@ -1,12 +1,15 @@
-using Assets.Scripts.BOT;
-using Assets.Scripts.InputCharacter;
-using Assets.Scripts.Interface;
-using System.Collections;
+using Assets.Scripts.StateControl;
 using UnityEngine;
 namespace Assets.Scripts.Character
 {
+    public interface IAttack
+    {
+        void Attack();
+        void KillingSpree(float percent);
+    }
     public abstract class CharacterAttack : MonoBehaviour, IAttack
     {
+        [SerializeField] protected CharacterState state;
         [SerializeField] protected AttackRange attackRange;
         [SerializeField] protected float attackDelay;
         [SerializeField] protected float percentIncrease;
@@ -47,11 +50,14 @@ namespace Assets.Scripts.Character
                         && targetObj.GetComponent<CharacterProperties>().IsAlive()
                         && !targetObj.GetComponent<CharacterProperties>().isSheildUp)
                     {
+                        state.stateAttack = StateAttack.AttackNormal;
                         targetObj.GetComponent<CharacterProperties>().Dead();
                         this.KillingSpree(percentIncrease);
+                        return;
                     }
                 }
-            }   
+            }
+            state.stateAttack = StateAttack.NoAttack;
         }
 
         bool IsAttackFirst(float timeObjA,float timeObjB)

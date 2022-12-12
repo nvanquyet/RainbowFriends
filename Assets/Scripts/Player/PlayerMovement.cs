@@ -1,5 +1,6 @@
 using Assets.Scripts.Character;
 using Assets.Scripts.InputCharacter;
+using Assets.Scripts.StateControl;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -16,6 +17,8 @@ namespace Assets.Scripts.Player
 
         private void Start()
         {
+            state = GetComponent<CharacterState>();
+            state.stateMove = StateMovement.Idle;
             canMove = true;
             speed = 5f;
         }
@@ -61,14 +64,21 @@ namespace Assets.Scripts.Player
                     {
                         transform.forward = movePos;
                     }
+                    state.stateMove = StateMovement.Walk;
                 }
                 else
                 {
                     fw = transform.forward;
                     right = transform.right;
+                    state.stateMove = StateMovement.Idle;
                 }
 
             }
+            else
+            {
+                state.stateMove = StateMovement.Idle;
+            }
+           
         }
     }
 }

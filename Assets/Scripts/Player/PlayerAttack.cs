@@ -1,6 +1,7 @@
 using Assets.Scripts.Booster;
 using Assets.Scripts.Character;
 using Assets.Scripts.InputCharacter;
+using Assets.Scripts.StateControl;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ namespace Assets.Scripts.Player
             attackDelay = 0;
             m_attackDelay = 0;
             percentIncrease = 5;
+            state = GetComponent<CharacterState>();
+            state.stateAttack = StateAttack.NoAttack;
         }
         private void Update()
         {

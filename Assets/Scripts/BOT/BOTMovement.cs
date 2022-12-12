@@ -1,4 +1,5 @@
 using Assets.Scripts.Character;
+using Assets.Scripts.StateControl;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,8 @@ namespace Assets.Scripts.BOT
         }
         private void Start()
         {
+            state = GetComponent<CharacterState>();
+            state.stateMove = StateMovement.Idle;
             canMove = true;
         }
 
@@ -24,10 +27,12 @@ namespace Assets.Scripts.BOT
             if (canMove)
             {
                 navMesh.SetDestination(targetAI.target.transform.position);
+                state.stateMove = StateMovement.Walk;
             }
             else
             {
                 navMesh.SetDestination(transform.position);
+                state.stateMove = StateMovement.Idle;
             }
         }
 
